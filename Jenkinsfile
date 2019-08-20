@@ -43,14 +43,14 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
-                        sh "sudo docker pull oteizaa/train-schedule:${env.BUILD_NUMBER}\"
+                        sh "sudo docker pull oteizaa/train-schedule:${env.BUILD_NUMBER}"
                         try {
-                            sh "sudo docker stop train-schedule\"
-                            sh "sudo docker rm train-schedule\"
+                            sh "sudo docker stop train-schedule"
+                            sh "sudo docker rm train-schedule"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sudo docker run --restart always --name train-schedule -p 80:8080 -d oteizaa/train-schedule:${env.BUILD_NUMBER}\"
+                        sh "sudo docker run --restart always --name train-schedule -p 80:8080 -d oteizaa/train-schedule:${env.BUILD_NUMBER}"
                     }
                 }
             }
