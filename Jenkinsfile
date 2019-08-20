@@ -8,19 +8,6 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('Build Docker Image') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    app = docker.build("oteizaa/train-schedule")
-                    app.inside {
-                        sh 'echo $(curl localhost:80)'
-                    }
-                }
-            }
-        }
         stage('Push Docker Image') {
             when {
                 branch 'master'
